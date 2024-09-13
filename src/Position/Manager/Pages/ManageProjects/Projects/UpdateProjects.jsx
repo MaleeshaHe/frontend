@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'; // Import React and hooks
 import { useNavigate, useParams } from 'react-router-dom'; // Import React Router components
 import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
 import { Grid, Container, Box, TextField, Button, Typography, Paper, MenuItem } from '@mui/material'; // Import Material-UI components
-import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 export default function Updateprojects() {
   const navigate = useNavigate(); // Initialize navigation

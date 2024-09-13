@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 
 export default function AddLocation() {
