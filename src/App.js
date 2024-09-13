@@ -70,7 +70,6 @@ function App() {
         />
         <Route path="/AddLocation" element={<AddLocation />} />
         <Route path="/locationHome" element={<LocationHome />} />
-        <Route path="/ManagerProfile" element={<ManagerProfile />} />
         <Route
           path="/UpdateLocation/:locationId"
           element={<UpdateLocation />}
