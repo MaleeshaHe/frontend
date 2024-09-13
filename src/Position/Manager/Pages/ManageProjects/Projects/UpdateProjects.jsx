@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'; // Import React and hooks
 import { useNavigate, useParams } from 'react-router-dom'; // Import React Router components
 import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
 import { Grid, Container, Box, TextField, Button, Typography, Paper, MenuItem } from '@mui/material'; // Import Material-UI components
-import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../../../Components/Navbar/NewNav.jsx';
+
 
 export default function Updateprojects() {
   const navigate = useNavigate(); // Initialize navigation
@@ -94,119 +95,149 @@ export default function Updateprojects() {
       </Grid>
 
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
 
         <Container maxWidth="md">
           <Box mt={4}>
             <Paper elevation={3}>
               <Box p={4}>
-                <Typography variant="h6" gutterBottom>
-                  Edit Project Details
+                <Typography variant="h4" align='center' gutterBottom>
+                  Update Project Details
                 </Typography>
                 <form onSubmit={onSubmit}>
-                <TextField
-                    fullWidth
-                    label="Project Id"
-                    name="projectId"
-                    value={projects.projectId}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                    error={!/^P\d{3}$/.test(projects.projectId)} // Validate the format
-                    helperText={!/^P\d{3}$/.test(projects.projectId) ? "Project ID must be in the format P001" : ""}
-                  />
-                  <TextField
-                    fullWidth
-                    label="Project Name"
-                    name="projectName"
-                    value={projectName}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Description"
-                    name="description"
-                    value={description}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Start Date"
-                    name="startDate"
-                    type="date"
-                    value={startDate}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                    InputLabelProps={{ shrink: true }}
-                  />
-                  <TextField
-                    fullWidth
-                    label="End Date"
-                    name="endDate"
-                    type="date"
-                    value={endDate}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                    InputLabelProps={{ shrink: true }}
-                  />
-                  <TextField
-                    fullWidth
-                    label="Site Supervisor ID"
-                    name="siteSupervisorID"
-                    value={siteSupervisorID}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Site Supervisor Name"
-                    name="siteSupervisorName"
-                    value={siteSupervisorName}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    fullWidth
-                    select
-                    label="Location ID"
-                    name="locationId"
-                    value={locationId}
-                    onChange={onInputChange}
-                    margin="normal"
-                    variant="outlined"
-                  >
-                    <MenuItem value="">
-                      <em>Select Location ID</em>
-                    </MenuItem>
-                    {locations.map(location => (
-                      <MenuItem key={location.locationId} value={location.locationId}>
-                        {location.locationId}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <TextField
-                    fullWidth
-                    label="Location Name"
-                    name="locationName"
-                    value={locationName}
-                    margin="normal"
-                    variant="outlined"
-                    InputProps={{
-                      readOnly: true,
-                    }}
-                  />
-                  <Box mt={2} display="flex" justifyContent="space-between">
-                    <Button variant="contained" color="primary" type="submit">
-                      Submit
-                    </Button>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Project Id"
+                        name="projectId"
+                        value={projects.projectId}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                        error={!/^P\d{3}$/.test(projects.projectId)} // Validate the format
+                        helperText={!/^P\d{3}$/.test(projects.projectId) ? "Project ID must be in the format P001" : ""}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Project Name"
+                        name="projectName"
+                        value={projects.projectName}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Description"
+                        name="description"
+                        value={projects.description}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Start Date"
+                        name="startDate"
+                        type="date"
+                        value={projects.startDate}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="End Date"
+                        name="endDate"
+                        type="date"
+                        value={projects.endDate}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Site Supervisor ID"
+                        name="siteSupervisorID"
+                        value={projects.siteSupervisorID}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Site Supervisor Name"
+                        name="siteSupervisorName"
+                        value={projects.siteSupervisorName}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        select
+                        label="Location ID"
+                        name="locationId"
+                        value={projects.locationId}
+                        onChange={onInputChange}
+                        margin="normal"
+                        variant="outlined"
+                      >
+                        <MenuItem value="">
+                          <em>Select Location ID</em>
+                        </MenuItem>
+                        {locations.map(location => (
+                          <MenuItem key={location.locationId} value={location.locationId}>
+                            {location.locationId}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Location Name"
+                        name="locationName"
+                        value={projects.locationName}
+                        margin="normal"
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                    <Box flexGrow={1}>
+                      <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }} type="submit">
+                        Update
+                      </Button>
+                    </Box>
+                    <Box flexGrow={1}>
+                      <Link to='/manageprojects' style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }} >
+                          Cancel
+                        </Button>
+                      </Link>
+                    </Box>
                   </Box>
                 </form>
               </Box>
