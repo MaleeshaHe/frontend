@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { 
-  CssBaseline, Container, Grid, TextField, Button, Typography, Paper, Box, IconButton 
-} from '@mui/material';
+    CssBaseline, InputLabel, Container, MenuItem, Select, Grid, TextField, Button, Typography, Paper, Box, IconButton, Avatar
+  } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
@@ -14,15 +14,20 @@ const UserEdit = () => {
         contact: "",
         firstname: "",
         lastname: "",
+        gender: "",
         nic: "",
         password: "",
         confirmPassword: "",
         role: "",
-        username: ""
+        username: "",
+        userimageData: "" // Base64 string or URL for image
     });
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [imageFile, setImageFile] = useState(null); // State for the new image file
+    const [imagePreview, setImagePreview] = useState(""); // State for image preview
+
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -37,6 +42,11 @@ const UserEdit = () => {
               `${process.env.REACT_APP_API_URL}authentication/${id}`
             );
             setUser(result.data);
+            // Set user image if it exists in the response
+            if (result.data.userimageData) {
+                setImagePreview(`data:image/jpeg;base64,${result.data.userimageData}`);
+            }
+
         } catch (error) {
             console.error("Error occurred:", error);
         }
@@ -47,6 +57,20 @@ const UserEdit = () => {
         setUser(prevUser => ({ ...prevUser, [name]: value }));
     };
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setImageFile(file);
+
+        // Preview the image
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (user.password !== user.confirmPassword) {
@@ -54,14 +78,32 @@ const UserEdit = () => {
             return;
         }
         try {
+
+           // Prepare form data for submission
+            const formData = new FormData();
+            formData.append('contact', user.contact);
+            formData.append('firstname', user.firstname);
+            formData.append('lastname', user.lastname);
+            formData.append('gender', user.gender);
+            formData.append('nic', user.nic);
+            formData.append('password', user.password);
+            formData.append('confirmPassword', user.confirmPassword);
+            formData.append('role', user.role);
+            formData.append('username', user.username);
+            if (imageFile) formData.append('userimageData', imageFile); // Changed field name to 'userimageData'
+
             await axios.put(
-              `${process.env.REACT_APP_API_URL}authentication/${id}`,
-              user
-            );
+              `${process.env.REACT_APP_API_URL}authentication/${id}`,formData,{
+                     headers:{
+                        'Content-Type': 'multipart/form-data'
+                    }
+        });
             alert("User updated successfully");
             navigate("/usernamage");
         } catch (error) {
             console.error("Error occurred:", error);
+            alert("Unsuccessfully!");
+
         }
     };
 
@@ -83,6 +125,20 @@ const UserEdit = () => {
                     <Paper elevation={3} style={{ padding: '60px' }}>
                         <form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
+                                {/* Display user image */}
+                                <Grid item xs={12} container justifyContent="center" >
+                                    <Avatar
+                                        src={imagePreview || `data:image/jpeg;base64,${user.userimageData}`}
+                                        alt="User Image"
+                                        sx={{ width: 100, height: 100, mb: 2 }}
+                                    />
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                        style={{ marginTop: '10px' }}
+                                    />
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         fullWidth
@@ -102,6 +158,18 @@ const UserEdit = () => {
                                         onChange={handleInputChange}
                                         variant="outlined"
                                     />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <InputLabel>Gender</InputLabel>
+                                    <Select
+                                        fullWidth
+                                        name="gender"
+                                        value={user.gender}
+                                        onChange={handleInputChange}
+                                    >
+                                        <MenuItem value="Male">Male</MenuItem>
+                                        <MenuItem value="Female">Female</MenuItem>
+                                    </Select>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
@@ -199,14 +267,15 @@ const UserEdit = () => {
                                             </Button>
                                         </Box>
                                         <Box flexGrow={1}>
-                                            <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+                                            
                                                 <Button
+                                                    onClick={() => navigate(-1)}
                                                     variant="contained"
                                                     sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
                                                 >
                                                     Cancel
                                                 </Button>
-                                            </Link>
+                                            
                                         </Box>
                                     </Box>
                                 </Grid>
