@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}authentication/getUserDetails/${userInfo.id}`); // Fetch user details using userInfo.id
+        const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${userInfo.id}`); // Fetch user details using userInfo.id
         setUserInfo(response.data);
         localStorage.setItem('userInfo', JSON.stringify(response.data)); // Update localStorage
       } catch (error) {
@@ -45,10 +45,10 @@ const Navbar = () => {
           Welcome, {userInfo.role || 'Guest'}!
         </Typography>
 
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton sx={{ ml: 2 }} onClick={() => navigate('/profile')}>
-            <Avatar src={userInfo.userimagedata || ''} />
-          </IconButton>
+        <Avatar src={userInfo.userimageData || ''} />
+         
+        <Box sx={{ display: 'flex', alignItems: 'center' }} gap={2}>
+          
 
           <Typography
             variant="h6"
@@ -56,19 +56,17 @@ const Navbar = () => {
             sx={{ ml: 2, cursor: 'pointer' }}
             onClick={handleMenuOpen}
           >
-            Mr. {userInfo.firstname || 'Guest'}
+            {userInfo.firstname || 'Guest'}
           </Typography>
+
 
           <Menu
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
           >
-            <MenuItem onClick={() => { navigate('/profile'); handleMenuClose(); }}>
+            <MenuItem onClick={() => { navigate(`/profile/${userInfo.firstname}`); handleMenuClose(); }}>
               Profile
-            </MenuItem>
-            <MenuItem onClick={() => { navigate('/settings'); handleMenuClose(); }}>
-              Settings
             </MenuItem>
           </Menu>
 

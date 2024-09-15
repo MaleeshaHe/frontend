@@ -1,47 +1,45 @@
-import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import React from 'react';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 
 //import Home from '../src/Components/Home.jsx';
-import LoginForm from "../src/LoginPage/LoginForm.jsx";
+import LoginForm from '../src/LoginPage/LoginForm.jsx';
 
-import ManageStock from "./Position/StockSupervisor/ManageStock/ManageStock.jsx";
-import Toolbox from "./Position/StockSupervisor/ToolBox/Toolbox.jsx";
-import CreateToolbox from "./Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx";
-import Reports from "./Position/StockSupervisor/Reports/Reports.jsx";
-import AddTool from "./Position/StockSupervisor/ManageStock/AddTool.jsx";
-import EditTool from "./Position/StockSupervisor/ManageStock/EditTool.jsx";
-import StockSupervisorDashboard from "./Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx";
+import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
+import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
+import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
+import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
+import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
+import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
+import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
 
-import ManagerDashboard from "./Position/Manager/Pages/ManagerDashboard.jsx";
-import ManagerTrackToolBox from "./Position/Manager/Pages/ManagerTrackToolBox.jsx";
-import ManageProjects from "./Position/Manager/Pages/ManageProjects/ManageProjects.jsx";
-import ToolStockDetails from "./Position/Manager/Pages/ToolStockDetails.jsx";
-import ViewToolBoxDetails from "./Position/Manager/Pages/ViewToolBoxDetails.jsx";
-import AddProjects from "./Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx";
-import UpdateProjects from "./Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx";
-import LocationHome from "./Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx";
-import AddLocation from "./Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx";
+import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
+import ManagerTrackToolBox from './Position/Manager/Pages/ManagerTrackToolBox.jsx';
+import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
+import ToolStockDetails from './Position/Manager/Pages/ToolStockDetails.jsx';
+import ViewToolBoxDetails from './Position/Manager/Pages/ViewToolBoxDetails.jsx';
+import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
+import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
+import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
+import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 
-import Dboard from "./Position/Sitesupervisor/dashboard/Dboard.jsx";
+import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
-import ViewProjects from "./Position/Sitesupervisor/ViewProjects.jsx";
-import ViewRequiredToolReports from "./Position/Sitesupervisor/View/ViewRequiredToolReports.jsx";
-import ViewToolStatusReports from "./Position/Sitesupervisor/View/ViewToolStatusReports.jsx";
-import AddToolStatus from "./Position/Sitesupervisor/AddToolStatus.jsx";
-import Tool from "./Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx";
-import Cart from "./Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx";
-import DashBoard from "./Position/Admin/Dashboard/DashBoard.jsx";
-import UpdateLocation from "./Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx";
-import Profile from "./Components/Profile/Profile.jsx";
-import ManagerProfile from "./Components/Profile/ManagerProfile.jsx";
-import UpdateToolbox from "./Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx";
-import TrackToolboxes from "./Position/Sitesupervisor/TrackToolBoxes.jsx";
-import UserManage from "../src/Position/Admin/UserManage/UserManage.jsx";
-import UserReg from "../src/Position/Admin/UserReg/UserReg.jsx";
-import SiteSupervisorProfile from "./Components/Profile/SiteSupervisorProfile.jsx";
-import UserEdit from "./Position/Admin/UserManage/UserEdit.jsx";
+import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
+import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
+import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
+import AddToolStatus from './Position/Sitesupervisor/AddToolStatus.jsx';
+import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
+import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
+import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
+import Profile from './Components/Profile/Profile.jsx';
+import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
+import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
+import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
+import UserReg from '../src/Position/Admin/UserReg/UserReg.jsx'
+import UserEdit from './Position/Admin/UserManage/UserEdit.jsx';
 
 function App() {
   
@@ -52,7 +50,8 @@ function App() {
         <Route path="/" element={<LoginForm />}>
           {" "}
         </Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route  path='/profile/:username' element={<Profile/>}></Route>
+
         {/* Admin pages  */}
         <Route path="/admindashboard" element={<DashBoard />} />
         <Route path="/usernamage" element={<UserManage />} />
@@ -70,7 +69,6 @@ function App() {
         />
         <Route path="/AddLocation" element={<AddLocation />} />
         <Route path="/locationHome" element={<LocationHome />} />
-        <Route path="/ManagerProfile" element={<ManagerProfile />} />
         <Route
           path="/UpdateLocation/:locationId"
           element={<UpdateLocation />}
@@ -90,11 +88,10 @@ function App() {
         <Route path="/tool" element={<Tool />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/reports" element={<Reports />} />
+       
+       
         {/* SiteSupervisor pages */}
-        <Route
-          path="/sitesupervisorprofile"
-          element={<SiteSupervisorProfile />}
-        />
+        
         <Route path="/sitesupervisor" element={<Dboard />}>
           {" "}
         </Route>

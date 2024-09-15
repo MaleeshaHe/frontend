@@ -6,11 +6,12 @@ import {
   Avatar, IconButton, Grid, Paper, Typography, TextField, Box, Button, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import NewNav from '../Navbar/NewNav.jsx';
 
 
 const Profile = () => {
-  const { username } = useParams();
   const navigate = useNavigate();
+  const { username } = useParams(); 
 
   const [user, setUser] = useState({
     contact: "",
@@ -43,9 +44,8 @@ const Profile = () => {
       if (result.data.userimageData) {
         setImagePreview(`data:image/jpeg;base64,${result.data.userimageData}`);
       }
-           
     } catch (error) {
-      console.error('Error fetching user details:', error);
+      console.error("Error occurred:", error);
     }
   };
 
@@ -109,6 +109,7 @@ const Profile = () => {
   };
 
 
+  };
 
   return (
     <Grid container>
