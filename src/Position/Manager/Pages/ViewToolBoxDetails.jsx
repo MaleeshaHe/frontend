@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container } from '@mui/material';
 
 const Toolbox = () => {
