@@ -16,9 +16,11 @@ const UserReg = () => {
     confirmPassword: '',
     firstname: '',
     lastname: '',
+    gender: '',
     nic: '',
     contact: '',
-    role: ''
+    role: '',
+    userimageData: null // State for image data
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +32,13 @@ const UserReg = () => {
     setUserDetails({
       ...userDetails,
       [name]: value
+    });
+  };
+
+  const handleFileChange = (e) => {
+    setUserDetails({
+      ...userDetails,
+      userimageData: e.target.files[0]
     });
   };
 
@@ -71,13 +80,26 @@ const UserReg = () => {
     e.preventDefault();
     if (!validateFields()) return;
 
+
+    const formData = new FormData();
+    formData.append('userid', userDetails.userid);
+    formData.append('username', userDetails.username);
+    formData.append('password', userDetails.password);
+    formData.append('firstname', userDetails.firstname);
+    formData.append('lastname', userDetails.lastname);
+    formData.append('gender', userDetails.gender);
+    formData.append('nic', userDetails.nic);
+    formData.append('contact', userDetails.contact);
+    formData.append('role', userDetails.role);
+    if (userDetails.userimageData) {
+        formData.append('userimageData', userDetails.userimageData);
+    }
+
     try {
+
       const response = await fetch(`${process.env.REACT_APP_API_URL}authentication/createUser`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userDetails)
+        body:formData
       });
       if (response.ok) {
         alert('User registered successfully!');
@@ -123,7 +145,7 @@ const UserReg = () => {
             New User Register Form
           </Typography>
 
-          <Paper elevation={3} style={{ padding: '60px' }}>
+          <Paper elevation={3} style={{ padding: '40px' }}>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -219,6 +241,22 @@ const UserReg = () => {
                     helperText={errors.lastname}
                   />
                 </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth variant="outlined" error={!!errors.gender}>
+                    <InputLabel>Gender</InputLabel>
+                    <Select
+                      label="Gender"
+                      name="gender"
+                      value={userDetails.gender}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female">Female</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="nic"
@@ -230,11 +268,11 @@ const UserReg = () => {
                     helperText={errors.nic}
                   />
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="contact"
-                    label="Contact"
-                    type="tel"
+                    label="Contact Number"
                     fullWidth
                     value={userDetails.contact}
                     onChange={handleChange}
@@ -257,37 +295,57 @@ const UserReg = () => {
                       <MenuItem value="SiteSupervisor">Site Supervisor</MenuItem>
                       <MenuItem value="Manager">Manager</MenuItem>
                     </Select>
-                    {!!errors.role && <Typography color="error" variant="caption">{errors.role}</Typography>}
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
-                  <Box mt={2} display="flex" justifyContent="center" gap={2}>
-                    <Box flexGrow={1}>
-                      <Button
-                        variant="contained"
-                        sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
-                        type="submit"
-                      >
-                        Submit
-                      </Button>
-                    </Box>
-                   
-                   <Box flexGrow={1}>
-                        <Link to="/usernamage" style={{ textDecoration: 'none' }}>
-                          <Button
-                              variant="contained"
-                              sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                          >
-                            Cancel
-                          </Button>
-                          </Link>
-                      </Box>
-
-
-                  </Box>
+                <Grid item xs={12} sm={12} container justifyContent="center">
+                  <Button
+                    variant="contained"
+                    component="label"
+                    sx={{ bgcolor: 'blue', width: '80%', fontSize: '1.2rem', maxWidth: "150px" }}
+                  >
+                    Upload Image
+                    <input
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={handleFileChange}
+                    />
+                  </Button>
+                  {userDetails.userimageData && (
+                    <Typography variant="body2" style={{ marginTop: '10px' }}>
+                      Selected file: {userDetails.userimageData.name}
+                    </Typography>
+                  )}
                 </Grid>
-              </Grid>
+    
+    <Grid item xs={12}>
+      <Box mt={2} display="flex" justifyContent="center" gap={2}>
+    
+    <Box flexGrow={1}> 
+      <Button
+        variant="contained"
+        sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+        type="submit"
+      >
+        Submit
+      </Button>
+    </Box>
+    {/* cancel button */}
+    <Box flexGrow={1}>
+    
+        <Button
+          onClick={() => navigate(-1)}
+          variant="contained"
+          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+        >
+          Cancel
+        </Button>
+   
+    </Box>
+  </Box> 
+</Grid>
+</Grid>
             </form>
           </Paper>
         </Container>
