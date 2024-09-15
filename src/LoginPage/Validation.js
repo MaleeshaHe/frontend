@@ -3,13 +3,13 @@ const Validation = (values) => {
     let errors = {};
 
     if (!values.username) {
-        errors.username = "Email Required";
-    } else {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(values.username)) {
-            errors.username = "Invalid email format";
-        }
+        errors.username = "Username is required";
+    // } else if (values.username.length < 3) {
+    //     errors.username = "Username must be at least 3 characters long";
+    // } else if (values.username.length > 20) {
+    //     errors.username = "Username must not exceed 20 characters";
     }
+    
 
     if (!values.password) {
         errors.password = "Password Required";
