@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import './LocationHome.css';
 import { Grid, Container, Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment } from '@mui/material';
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 import SearchIcon from '@mui/icons-material/Search'; // Import SearchIcon from Material-UI
 
 export default function LocationHome() {

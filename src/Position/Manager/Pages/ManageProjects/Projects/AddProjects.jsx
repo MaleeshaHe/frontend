@@ -2,7 +2,6 @@ import axios from 'axios'; // Import axios for making HTTP requests
 import React, { useState, useEffect } from 'react'; // Import React and hooks
 import { Link, useNavigate } from 'react-router-dom'; // Import React Router components
 import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
-import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Container, Box, TextField, Button, Typography, Paper, MenuItem } from '@mui/material'; // Import Material-UI components
 
 export default function AddProjects() {

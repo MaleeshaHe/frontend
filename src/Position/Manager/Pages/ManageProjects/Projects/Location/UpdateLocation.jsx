@@ -2,7 +2,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom'; // Import React
 import React, { useEffect, useState } from 'react'; // Import React and hooks
 import axios from 'axios'; // Import axios for making HTTP requests
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material'; // Import Material-UI components
 
 // Main function component for updating a location

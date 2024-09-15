@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Container, Box, Typography, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
