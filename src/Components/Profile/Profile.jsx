@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import NewNav from '../Navbar/NewNav.jsx';
 import {
   Avatar, IconButton, Grid, Paper, Typography, TextField, Box, Button, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import NewNav from '../Navbar/NewNav.jsx';
+
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -29,10 +31,13 @@ const Profile = () => {
   const [imageFile, setImageFile] = useState(null); // State for the new image file
   const [imagePreview, setImagePreview] = useState(""); // State for image preview
 
-  // Fetch user details from the API
+
+  // Get user details from the database
   const loadUser = async () => {
     try {
-      const result = await axios.get(`http://localhost:8080/authentication/getUserInfo/${username}`);
+      const result = await axios.get(
+        `${process.env.REACT_APP_API_URL}authentication/getUserInfo/${username}`
+      );
       setUser(result.data);
 
       // Set user image if it exists in the response
@@ -67,15 +72,16 @@ const Profile = () => {
     }
   };
 
+  // Update user details function
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (user.password !== user.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-
     try {
-      // Prepare form data for submission
+       // Prepare form data for submission
       const formData = new FormData();
       formData.append('contact', user.contact);
       formData.append('firstname', user.firstname);
@@ -88,17 +94,21 @@ const Profile = () => {
       formData.append('username', user.username);
       if (imageFile) formData.append('userimageData', imageFile);
 
-      await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      alert("Successfully updated user details!");
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}authentication/updateUserProfile/${username}`,formData,{
+            headers:{
+              'Content-Type': 'mulyipart/form-data'
+            }
+        });
+      alert('User details updated successfully');
       navigate(-1);
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error('Error updating user details:', error);
       alert("Unsuccessfully!");
     }
+  };
+
+
   };
 
   return (
