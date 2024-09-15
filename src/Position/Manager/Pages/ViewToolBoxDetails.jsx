@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import { Grid, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container } from '@mui/material';
 
 const Toolbox = () => {
@@ -56,7 +57,7 @@ const Toolbox = () => {
             </Grid>
 
       <Grid item xs>
-      <ManagerNavbar />
+      <NewNav />
 
         <Container maxWidth="md">
           <Box mt={4}>
