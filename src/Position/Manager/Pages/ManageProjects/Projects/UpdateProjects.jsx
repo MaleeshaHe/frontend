@@ -5,7 +5,6 @@ import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx'; // Im
 import { Grid, Container, Box, TextField, Button, Typography, Paper, MenuItem } from '@mui/material'; // Import Material-UI components
 import NewNav from '../../../../../Components/Navbar/NewNav.jsx';
 
-
 export default function Updateprojects() {
   const navigate = useNavigate(); // Initialize navigation
   const { project_id } = useParams(); // Get the project ID from the URL parameters
