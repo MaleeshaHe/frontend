@@ -6,8 +6,6 @@ import {
   Avatar, IconButton, Grid, Paper, Typography, TextField, Box, Button, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import NewNav from '../Navbar/NewNav.jsx';
-
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -30,7 +28,6 @@ const Profile = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [imageFile, setImageFile] = useState(null); // State for the new image file
   const [imagePreview, setImagePreview] = useState(""); // State for image preview
-
 
   // Get user details from the database
   const loadUser = async () => {
@@ -95,20 +92,18 @@ const Profile = () => {
       if (imageFile) formData.append('userimageData', imageFile);
 
       await axios.put(
-        `${process.env.REACT_APP_API_URL}authentication/updateUserProfile/${username}`,formData,{
-            headers:{
-              'Content-Type': 'mulyipart/form-data'
-            }
-        });
+        `${process.env.REACT_APP_API_URL}authentication/updateUserProfile/${username}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      );
       alert('User details updated successfully');
       navigate(-1);
     } catch (error) {
       console.error('Error updating user details:', error);
       alert("Unsuccessfully!");
     }
-  };
-
-
   };
 
   return (
@@ -186,7 +181,6 @@ const Profile = () => {
                       name="nic"
                       value={user.nic}
                       variant="outlined"
-                      
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
